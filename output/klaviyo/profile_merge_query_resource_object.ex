@@ -1,0 +1,17 @@
+defmodule ProfileMergeQueryResourceObject do
+  @moduledoc """
+  Provides struct and type for a ProfileMergeQueryResourceObject
+  """
+
+  @type t :: %__MODULE__{id: String.t(), relationships: map, type: String.t()}
+
+  defstruct [:id, :relationships, :type]
+
+  @doc false
+  @spec __fields__(atom) :: keyword
+  def __fields__(type \\ :t)
+
+  def __fields__(:t) do
+    [id: {:string, :generic}, relationships: :map, type: {:const, "profile-merge"}]
+  end
+end
