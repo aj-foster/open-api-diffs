@@ -19,7 +19,7 @@ jobs:
           echo "REF=${{ github.event.client_payload.ref }}" >> $GITHUB_ENV"
 
       - name: Setup Ref (Workflow Dispatch)
-        if: github.event_name == 'repository_dispatch'
+        if: github.event_name == 'workflow_dispatch'
         run: |
           echo "REF=${{ inputs.ref }}" >> $GITHUB_ENV
 
