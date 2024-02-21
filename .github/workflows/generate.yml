@@ -1,0 +1,55 @@
+on:
+  repository_dispatch:
+    types: [generate]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Ref of aj-foster/open-api-generator
+        required: true
+        type: string
+
+jobs:
+  generate:
+    name: Generate Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Ref (Repository Dispatch)
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          echo "REF=${{ github.event.client_payload.ref }}" >> $GITHUB_ENV"
+
+      - name: Setup Ref (Workflow Dispatch)
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          echo "REF=${{ inputs.ref }}" >> $GITHUB_ENV"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup BEAM
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: "25.2"
+          elixir-version: "1.14.2"
+
+      - name: Fetch Hex Cache
+        uses: actions/cache@v4
+        id: hex-cache
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Generate Code
+        run: |
+          elixir generate.exs $REF
+
+      - name: Save Code
+        run: |
+          git add output/
+          git commit -m "Generated output for aj-foster/open-api-generator@${{ github.event.client_payload.ref }}""
+          git tag -f "oapi_generator/${{ github.event.client_payload.ref }}"
+          git push --tags --force
