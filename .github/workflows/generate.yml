@@ -39,6 +39,6 @@ jobs:
       - name: Save Code
         run: |
           git add output/
-          git commit -m "Generated output for aj-foster/open-api-generator@${{ github.event.client_payload.ref }}""
-          git tag -f "oapi_generator/${{ github.event.client_payload.ref }}"
+          git commit -m "Generated output for aj-foster/open-api-generator@$REF"
+          git tag -f "oapi_generator/$REF"
           git push --tags --force
