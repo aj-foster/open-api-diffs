@@ -21,7 +21,7 @@ jobs:
       - name: Setup Ref (Workflow Dispatch)
         if: github.event_name == 'repository_dispatch'
         run: |
-          echo "REF=${{ inputs.ref }}" >> $GITHUB_ENV"
+          echo "REF=${{ inputs.ref }}" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,20 +32,9 @@ jobs:
           otp-version: "25.2"
           elixir-version: "1.14.2"
 
-      - name: Fetch Hex Cache
-        uses: actions/cache@v4
-        id: hex-cache
-        with:
-          path: |
-            deps
-            _build
-          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-
-
       - name: Generate Code
         run: |
-          elixir generate.exs $REF
+          elixir generate.exs "$REF"
 
       - name: Save Code
         run: |
