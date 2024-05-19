@@ -41,5 +41,8 @@ for spec_file <- Path.wildcard(spec_files) do
   config = Application.get_all_env(:oapi_generator)
   profile = if Keyword.has_key?(config, String.to_atom(spec_name)), do: spec_name, else: "default"
 
-  OpenAPI.run(profile, [spec_file])
+  Task.async(fn ->
+    OpenAPI.run(profile, [spec_file])
+  end)
 end
+|> Task.await_many(:infinity)
