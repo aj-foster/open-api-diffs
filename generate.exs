@@ -39,7 +39,6 @@ for spec_file <- Path.wildcard(spec_files) do
 
   if File.dir?(output_directory) do
     Logger.info("Skipping #{spec_name}")
-    Task.completed(:noop)
   else
     File.mkdir_p!(output_directory)
     File.cd!(output_directory)
@@ -49,9 +48,6 @@ for spec_file <- Path.wildcard(spec_files) do
     profile =
       if Keyword.has_key?(config, String.to_atom(spec_name)), do: spec_name, else: "default"
 
-    Task.async(fn ->
-      OpenAPI.run(profile, [spec_file])
-    end)
+    OpenAPI.run(profile, [spec_file])
   end
 end
-|> Task.await_many(:infinity)
