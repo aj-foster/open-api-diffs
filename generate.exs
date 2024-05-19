@@ -29,6 +29,8 @@ Path.join(__DIR__, "specs/config.exs")
 # Generate
 #
 
+require Logger
+
 spec_files = Path.join(__DIR__, "specs/*.{json,yaml,yml}")
 
 for spec_file <- Path.wildcard(spec_files) do
@@ -36,6 +38,7 @@ for spec_file <- Path.wildcard(spec_files) do
   output_directory = Path.join(__DIR__, "output/#{spec_name}")
 
   if File.dir?(output_directory) do
+    Logger.info("Skipping #{spec_name}")
     Task.completed(:noop)
   else
     File.mkdir_p!(output_directory)
