@@ -2,18 +2,20 @@
 # Install
 #
 
-ref =
-  case System.argv() do
-    [ref] ->
-      ref
+case System.argv() do
+  ["path:" <> path] ->
+    Mix.install([
+      {:oapi_generator, path: path}
+    ])
 
-    _else ->
-      raise "Invalid invocation: please pass the ref of aj-foster/open-api-generator to install"
-  end
+  [ref] ->
+    Mix.install([
+      {:oapi_generator, github: "aj-foster/open-api-generator", ref: ref}
+    ])
 
-Mix.install([
-  {:oapi_generator, github: "aj-foster/open-api-generator", ref: ref}
-])
+  _else ->
+    raise "Invalid invocation: please pass the ref of aj-foster/open-api-generator to install"
+end
 
 #
 # Configuration
