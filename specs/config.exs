@@ -120,6 +120,9 @@ config :oapi_generator,
   line: [
     output: [base_module: Line, location: "output/line/"]
   ],
+  mollie: [
+    output: [base_module: Mollie, location: "output/mollie/"]
+  ],
   openai: [
     output: [base_module: OpenAI, location: "output/openai/"]
   ],
