@@ -9,7 +9,12 @@
 import Config
 
 config :oapi_generator,
-  default: [],
+  affinda: [
+    output: [base_module: Affinda, location: "output/affinda/"]
+  ],
+  discord: [
+    output: [base_module: Discord, location: "output/discord/"]
+  ],
   github: [
     naming: [
       group: [
@@ -97,7 +102,7 @@ config :oapi_generator,
     output: [
       base_module: GitHub,
       extra_fields: [__info__: :map],
-      location: "lib/",
+      location: "output/github/",
       operation_subdirectory: "operations/",
       schema_subdirectory: "schemas/",
       schema_use: GitHub.Encoder,
@@ -105,4 +110,28 @@ config :oapi_generator,
         error: {GitHub.Error, :t}
       ]
     ]
+  ],
+  "hubspot-companies": [
+    output: [base_module: HubSpot.Companies, location: "output/hubspot-companies/"]
+  ],
+  klaviyo: [
+    output: [base_module: Klaviyo, location: "output/klaviyo/"]
+  ],
+  line: [
+    output: [base_module: Line, location: "output/line/"]
+  ],
+  openai: [
+    output: [base_module: OpenAI, location: "output/openai/"]
+  ],
+  sentry: [
+    output: [base_module: Sentry, location: "output/sentry/"]
+  ],
+  spotify: [
+    output: [base_module: Spotify, location: "output/spotify/"]
+  ],
+  "stability-ai": [
+    output: [base_module: StabilityAI, location: "output/stability-ai/"]
+  ],
+  typesense: [
+    output: [base_module: Typesense, location: "output/typesense/"]
   ]
