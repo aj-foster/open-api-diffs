@@ -127,13 +127,13 @@ config :oapi_generator,
     output: [base_module: OpenAI, location: "output/openai/"]
   ],
   sentry: [
-    output: [base_module: Sentry, location: "output/sentry/"]
+    output: [base_module: Sentry, location: "output/sentry/", types: [specs: :spec_comprehensive]]
   ],
   "space-traders": [
     output: [base_module: SpaceTraders, location: "output/space-traders/"]
   ],
   spotify: [
-    output: [base_module: Spotify, location: "output/spotify/"]
+    output: [base_module: Spotify, location: "output/spotify/", types: [specs: :callback]]
   ],
   "stability-ai": [
     output: [base_module: StabilityAI, location: "output/stability-ai/"]
