@@ -9,9 +9,10 @@ case System.argv() do
     ])
 
   [ref] ->
-    Mix.install([
-      {:oapi_generator, github: "aj-foster/open-api-generator", ref: ref}
-    ])
+    Mix.install(
+      [{:oapi_generator, github: "aj-foster/open-api-generator", ref: ref}],
+      force: true
+    )
 
   _else ->
     raise "Invalid invocation: please pass the ref of aj-foster/open-api-generator to install"
