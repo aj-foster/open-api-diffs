@@ -129,6 +129,9 @@ config :oapi_generator,
   sentry: [
     output: [base_module: Sentry, location: "output/sentry/"]
   ],
+  "space-traders": [
+    output: [base_module: SpaceTraders, location: "output/space-traders/"]
+  ],
   spotify: [
     output: [base_module: Spotify, location: "output/spotify/"]
   ],
